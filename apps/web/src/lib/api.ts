@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import type { ApiBarber, Barber, BarberSlots, BarberTone, Booking, Service, Slot } from "@/types";
 import { todayInShop } from "./time";
 
@@ -18,6 +19,8 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string): Promise<T> {
+  // Render per request: catalog and slots must be live, and the API is not reachable at build time.
+  await connection();
   let response: Response;
   try {
     // Catalog changes from the admin panel must show up immediately.
