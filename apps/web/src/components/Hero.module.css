@@ -1,0 +1,202 @@
+/* Full-bleed stage slides under the transparent sticky header */
+.stage {
+  position: relative;
+  isolation: isolate;
+  margin-top: calc(var(--header-h) * -1);
+  padding-top: var(--header-h);
+  padding-bottom: clamp(56px, 8vw, 96px);
+  overflow: clip;
+}
+
+.hero {
+  display: grid;
+  gap: 40px;
+  padding-top: clamp(40px, 8vw, 96px);
+}
+
+.title {
+  font-size: clamp(2.25rem, 7.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  max-width: 13ch;
+}
+
+.word {
+  display: inline-block;
+  padding-block: 0.1em;
+  margin-block: -0.1em;
+}
+
+/* Intro: runs only when the head script sets html[data-intro="run"] */
+@keyframes word-in {
+  from {
+    translate: 0 100%;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    translate: 0 0;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+
+:global(html[data-intro="run"]) .word {
+  animation: word-in var(--dur-reveal) var(--ease-enter) both;
+  animation-delay: calc(80ms + var(--i) * var(--stagger));
+}
+
+:global(html[data-intro="run"]) .lead,
+:global(html[data-intro="run"]) .buttons,
+:global(html[data-intro="run"]) .address {
+  animation: rise-in var(--dur-reveal) var(--ease-enter) both;
+}
+
+:global(html[data-intro="run"]) .lead {
+  animation-delay: 380ms;
+}
+
+:global(html[data-intro="run"]) .buttons {
+  animation-delay: 450ms;
+}
+
+:global(html[data-intro="run"]) .address {
+  animation-delay: 520ms;
+}
+
+:global(html[data-intro="run"]) .ticket {
+  animation: rise-in var(--dur-cinematic) var(--ease-enter) 200ms both;
+}
+
+.lead {
+  margin-top: 20px;
+  max-width: 44ch;
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.address {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.ticket {
+  align-self: start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.stripe {
+  height: 14px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0 12px,
+    var(--surface) 12px 18px,
+    var(--ink) 18px 30px,
+    var(--surface) 30px 36px
+  );
+}
+
+.ticketBody {
+  padding: 24px;
+}
+
+.ticketTitle {
+  font-size: 1.25rem;
+}
+
+.rows {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  gap: 10px;
+  padding-block: 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.barber {
+  font-weight: 600;
+}
+
+.times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.slot {
+  display: inline-grid;
+  place-items: center;
+  min-width: 72px;
+  min-height: 44px;
+  padding-inline: 14px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-ui) var(--ease-ui),
+    color var(--dur-ui) var(--ease-ui),
+    scale var(--dur-press) var(--ease-ui);
+}
+
+.slot:active {
+  scale: 0.96;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .slot:hover {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+}
+
+.more {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (min-width: 560px) {
+  .row {
+    grid-template-columns: 96px 1fr;
+    align-items: center;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    grid-template-columns: 1.25fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+}
+
+.empty {
+  margin: 0;
+  padding-block: 16px;
+  color: var(--muted);
+}

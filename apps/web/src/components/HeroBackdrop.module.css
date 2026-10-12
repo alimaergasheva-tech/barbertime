@@ -1,0 +1,167 @@
+.backdrop {
+  --ease-drift: cubic-bezier(0.37, 0, 0.63, 1);
+  --drift-dur: 38s;
+  --blob-opacity: 0.42;
+  --grain-opacity: 0.07;
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  contain: strict;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+}
+
+:global([data-theme="dark"]) .backdrop {
+  --blob-opacity: 0.48;
+  --grain-opacity: 0.09;
+}
+
+/* Soft edge via closest-side falloff, no filter: blur. Only transform animates. */
+.blob {
+  position: absolute;
+  width: 62vmax;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--c), transparent);
+  opacity: var(--blob-opacity);
+  will-change: transform;
+  animation: drift-a var(--drift-dur) var(--ease-drift) infinite alternate;
+}
+
+.blobTeal {
+  --c: var(--accent);
+  top: -28vmax;
+  right: -14vmax;
+}
+
+.blobSteel {
+  --c: var(--steel);
+  top: 4vmax;
+  left: -30vmax;
+  animation-name: drift-b;
+  animation-duration: calc(var(--drift-dur) * 1.3);
+}
+
+.blobBrass {
+  --c: var(--brass);
+  bottom: -40vmax;
+  left: 30vw;
+  width: 48vmax;
+  opacity: calc(var(--blob-opacity) * 0.6);
+  animation-name: drift-c;
+  animation-duration: calc(var(--drift-dur) * 0.8);
+}
+
+@keyframes drift-a {
+  to {
+    transform: translate3d(-16vw, 12vh, 0) scale(1.15) rotate(18deg);
+  }
+}
+
+@keyframes drift-b {
+  to {
+    transform: translate3d(22vw, 8vh, 0) scale(0.9) rotate(-22deg);
+  }
+}
+
+@keyframes drift-c {
+  to {
+    transform: translate3d(-12vw, -10vh, 0) scale(1.2);
+  }
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+/* Film grain: the tile jitters in steps, which reads as moving footage */
+.grain {
+  position: absolute;
+  inset: -50%;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  animation: grain-jitter 0.9s steps(6) infinite;
+}
+
+@keyframes grain-jitter {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-8%, 5%);
+  }
+  40% {
+    transform: translate(6%, -9%);
+  }
+  60% {
+    transform: translate(-4%, 11%);
+  }
+  80% {
+    transform: translate(9%, 3%);
+  }
+  100% {
+    transform: translate(-2%, -6%);
+  }
+}
+
+.backdrop[data-paused="true"] .blob,
+.backdrop[data-paused="true"] .grain {
+  animation-play-state: paused;
+}
+
+.toggle {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 16px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color var(--dur-ui) var(--ease-ui),
+    border-color var(--dur-ui) var(--ease-ui);
+}
+
+.toggle svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .toggle:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+}
+
+@media (max-width: 640px) {
+  .blobBrass {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .grain {
+    animation: none;
+  }
+
+  .toggle {
+    display: none;
+  }
+}

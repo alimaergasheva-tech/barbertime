@@ -1,0 +1,27 @@
+.flap {
+  display: inline-flex;
+  font-variant-numeric: tabular-nums;
+  perspective: 200px;
+}
+
+.digit,
+.colon {
+  display: inline-block;
+}
+
+.digit {
+  min-width: 0.62em;
+  text-align: center;
+  transform-origin: 50% 0;
+}
+
+:global(html[data-intro="run"]) .digit {
+  animation: flap-drop 90ms var(--ease-ui) both;
+}
+
+@keyframes flap-drop {
+  from {
+    rotate: x -70deg;
+    opacity: 0.4;
+  }
+}

@@ -1,0 +1,17 @@
+.wrap {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding-block: 48px;
+}
+
+.card {
+  max-width: 560px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}

@@ -1,0 +1,22 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+test-results/
+playwright-report/
+motion-audit/
+*.tsbuildinfo
+next-env.d.ts
+packages/db/src/generated/
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+.vercel
+
+# Supabase CLI
+supabase/.temp/
+supabase/.branches/

@@ -1,0 +1,55 @@
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--steel) 18%, transparent);
+  color: var(--ink);
+}
+
+.confirmed {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+
+.cancelled,
+.no_show {
+  background: color-mix(in srgb, var(--brass) 18%, transparent);
+}
+
+.muted {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.panel {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.panelTitle {
+  font-size: 1.25rem;
+}
+
+.panelTitle:focus {
+  outline: none;
+}
+
+.times {
+  margin-top: 4px;
+}
+
+.footer {
+  margin-top: 24px;
+  font-size: 0.9375rem;
+}

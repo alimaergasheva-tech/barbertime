@@ -1,0 +1,6 @@
+# Supabase CLI config (only Edge Functions are managed by the CLI; schema lives in Prisma migrations).
+project_id = "barbertime"
+
+[functions.notifications]
+# Called by Supabase Cron with `Authorization: Bearer <CRON_SECRET>`, not with a user JWT.
+verify_jwt = false

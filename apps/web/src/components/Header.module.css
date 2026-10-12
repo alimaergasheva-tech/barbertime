@@ -1,0 +1,124 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  isolation: isolate;
+}
+
+/* Frosted plate: blur is static, only opacity follows the scroll */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+@supports (animation-timeline: scroll()) {
+  .header::before {
+    animation: header-plate linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 96px;
+  }
+}
+
+@keyframes header-plate {
+  from {
+    opacity: 0;
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: var(--header-h);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 1.25rem/1 var(--font-display);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.mark {
+  width: 28px;
+  height: 28px;
+  fill: var(--accent);
+}
+
+.edge {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.nav {
+  display: none;
+  gap: 28px;
+  margin-left: auto;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.cta {
+  min-height: 44px;
+  padding-inline: 18px;
+}
+
+@media (max-width: 479px) {
+  .inner {
+    gap: 12px;
+  }
+
+  .logo {
+    gap: 8px;
+    font-size: 1rem;
+  }
+
+  .mark {
+    width: 22px;
+    height: 22px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .cta {
+    padding-inline: 14px;
+  }
+}
+
+@media (min-width: 900px) {
+  .nav {
+    display: flex;
+  }
+
+  .actions {
+    margin-left: 12px;
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "barbershop",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @barbershop/web",
+    "dev:api": "npm run dev -w @barbershop/api",
+    "dev:miniapp": "npm run dev -w @barbershop/miniapp",
+    "db:generate": "npm run generate -w @barbershop/db",
+    "db:migrate": "npm run migrate -w @barbershop/db",
+    "db:deploy": "npm run deploy -w @barbershop/db",
+    "db:seed": "npm run seed -w @barbershop/db",
+    "db:check": "npm run check -w @barbershop/db",
+    "db:studio": "npm run studio -w @barbershop/db",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:e2e": "playwright test",
+    "bot:polling": "npm run bot:polling -w @barbershop/api",
+    "bot:setup": "npm run bot:setup -w @barbershop/api",
+    "bot:barber-link": "npm run bot:barber-link -w @barbershop/api --",
+    "notifications:run": "npm run notifications:run -w @barbershop/api",
+    "notifications:schedule": "npm run notifications:schedule -w @barbershop/api --",
+    "notifications:deploy": "npm run notifications:deploy -w @barbershop/api",
+    "admin:create": "npm run admin:create -w @barbershop/api --"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "supabase": "^2.120.0"
+  }
+}

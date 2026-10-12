@@ -1,0 +1,35 @@
+.footer {
+  margin-top: var(--section-gap);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 28px;
+}
+
+.inner a {
+  text-decoration: none;
+}
+
+.wordmarkWrap {
+  container-type: inline-size;
+  overflow: clip;
+}
+
+/* --em-width: width of the word at 1em in Unbounded 700 with the tracking below, measured */
+.wordmark {
+  --em-width: 7.2;
+  margin: 0;
+  font: 700 calc(100cqi / var(--em-width)) / 0.8 var(--font-display);
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--ink) 10%, var(--bg));
+  translate: 0 0.12em;
+  user-select: none;
+}

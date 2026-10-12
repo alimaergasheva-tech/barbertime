@@ -1,0 +1,48 @@
+.list {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 32px;
+}
+
+.item {
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+}
+
+.stars {
+  color: var(--brass);
+  letter-spacing: 2px;
+}
+
+.empty {
+  color: var(--line);
+}
+
+.quote {
+  margin: 10px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
+.author {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  margin-top: 14px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.date {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+@media (min-width: 900px) {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
